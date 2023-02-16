@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.org.sqx.emos.wx.mapper.TbWorkdayMapper">
+
+    <!-- 查询特殊工作日 -->
+    <select id="searchTodayIsWorkday" resultType="Integer">
+        SELECT id FROM tb_workday WHERE date=CURRENT_DATE LIMIT 1;
+    </select>
+
+    <!-- 查询指定时间内的工作日 -->
+    <select id="searchWorkdayInRange" parameterType="HashMap" resultType="String">
+        SELECT date
+        FROM tb_holidays
+        WHERE date BETWEEN #{startDate} AND #{endDate}
+    </select>
+</mapper>

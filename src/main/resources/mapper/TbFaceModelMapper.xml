@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.org.sqx.emos.wx.mapper.TbFaceModelMapper">
+    <!-- TODO 查询 -->
+    <!-- 签到查询 -->
+    <select id="searchFaceModel" parameterType="int" resultType="String">
+        SELECT user_id
+        FROM tb_face_model
+        WHERE user_id = #{userId}
+    </select>
+
+    <!-- TODO 增加 -->
+    <!-- 增加数据模型 -->
+    <insert id="insert" parameterType="cn.org.sqx.emos.wx.domain.TbFaceModel">
+        INSERT INTO tb_face_model
+        SET user_id    = #{userId},
+            face_model = #{faceModel}
+    </insert>
+
+    <!-- TODO 删除 -->
+    <!-- 删除人脸模型 -->
+    <delete id="deleteFaceModel" parameterType="int">
+        DELETE
+        FROM tb_face_model
+        WHERE user_id = #{userId}
+    </delete>
+</mapper>

@@ -1,0 +1,103 @@
+# 配置tomcat的信息
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    threads:
+      max: 200
+      min-spare: 30
+    connection-timeout: 5000ms
+  port: 8080
+  servlet:
+    context-path: /emos-wx-api
+
+spring:
+  # 配置MySQL信息
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/emos?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      username: root
+      password: root
+      initial-size: 8
+      max-active: 16
+      min-idle: 8
+      max-wait: 60000
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+
+  # 配置redis信息
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    #password: root
+    jedis:
+      pool:
+        max-active: 1000
+        max-wait: -1ms
+        max-idle: 16
+        min-idle: 8
+
+  # 配置MongoDB信息
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: emos
+      authentication-database: admin
+      username: root
+      password: root
+  # 配置邮箱
+  mail:
+    default-encoding: UTF-8
+    host: smtp.163.com
+    username: mjqhrgx@163.com
+    password: 19980814wff.
+
+# 配置mybatis
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: cn.org.sqx.emos.wx.db.domain
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+
+# 配置日志
+logging:
+  level:
+    root: info
+    cn.org.sqx.emos.wx.domain: warn
+  pattern:
+    console: "%d{HH:mm:ss}  %-5level  %msg%n"
+
+# 定义秘钥和过期时间
+emos:
+  jwt:
+    # 秘钥
+    secret: abc123456
+    # 令牌过期时间（天）
+    expire: 5
+    # 令牌缓存时间（天）
+    cache-expire: 10
+
+  # 人脸识别路径
+  face:
+    createFaceModelUrl: http://124.220.169.221:3000/create_face_model
+    checkinUrl: http://124.220.169.221:3000/checkin
+
+  # 邮箱
+  email:
+    system: mjqhrgx@163.com
+    hr: 571851389@qq.com
+
+  # 临时照片存放目录
+  image-folder: D:/emos/image
+
+  code: A3D1E72CE42186E2
+
+# 微信平台的权限
+wx:
+  app-id: wxf8bd21fce5327cb6
+  app-secret: ea40b9999fdf3c22522c821ac9098dd4
